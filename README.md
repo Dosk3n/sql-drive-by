@@ -21,7 +21,7 @@ Python 3 and BeautifulSoup4
 ###Installation in Kali Linux:
 #### Install the required packages:
 sudo apt-get update
-sudo apt-get install python3-bs4
+\nsudo apt-get install python3-bs4
 
 ## Usage
 
