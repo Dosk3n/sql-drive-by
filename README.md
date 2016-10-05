@@ -14,7 +14,7 @@ This program was created when I was teaching a friend (Shoutout to Jay =P) about
 
 ## Requirements
 
-Python 3 and BeautifulSoup4
+Python 3 and BeautifulSoup4.
 
 ## Installation
 
@@ -24,7 +24,9 @@ Note: Kali already has python3 installed so only needs Beautifulsoup4 installed 
 $ sudo apt-get update
 <br />$ sudo apt-get install python3-bs4
 <br /><br />
-Clone or download this git to a location of your choice
+Clone or download this git to a location of your choice.
+<br /><br />
+Done.
 
 ## Usage
 
