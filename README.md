@@ -1,4 +1,4 @@
-# sql-drive-by
+# Sql-drive-by v1.0.0
 
 ## Disclaimer
 
@@ -19,12 +19,18 @@ Python 3 and BeautifulSoup4
 ## Installation
 
 ###Installation in Kali Linux:
-Kali already has python3 installed and just needs ran using python3 rather than python. See Usage for examples.
+Note: Kali already has python3 installed so only needs Beautifulsoup4 installed and just needs ran using python3 rather than python on the command line. See Usage for examples.
 #### Install the required packages:
-sudo apt-get update
-<br />sudo apt-get install python3-bs4
+$ sudo apt-get update
+<br />$ sudo apt-get install python3-bs4
+<br /><br />
+Clone or download this git to a location of your choice
 
 ## Usage
 
+$ python3 sqldriveby.py --term=page.php?id= --engine=y --depth=3
+$ python3 sqldriveby.py --find-admin="http://www.yourpage.com"
 
+## Help
 
+This program requires python 3 so if your system has both python 2 and python 3 you must run the program using python3 from command line. If your system only has python3 installed you can run the program using python from command line.
