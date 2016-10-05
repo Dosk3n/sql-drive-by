@@ -6,7 +6,7 @@ This program was created for teaching purposes only! By using this program, you 
 
 ## Description
 
-Sql-drive-by is a program designed to find multiple websites that are vulnerable to sql injection by running a term through a search engine and testing its results. Additional features allow the user to search a website for potential admin pages.
+Sql-drive-by is a program designed to find multiple websites that are vulnerable to sql injection by running a term through a search engine, testing its results and returning the vulnerable sites as a list. Additional features allow the user to search a website for potential admin pages.
 
 ## Motivation
 
