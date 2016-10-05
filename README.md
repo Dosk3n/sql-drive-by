@@ -31,7 +31,10 @@ Done.
 ## Usage
 
 $ python3 sqldriveby.py --term=page.php?id= --engine=y --depth=3
+<br /><br />
 $ python3 sqldriveby.py --find-admin="http://www.yourpage.com"
+<br /><br />
+$ python3 sqldriveby.py --help
 
 ## Help
 
