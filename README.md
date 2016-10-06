@@ -40,6 +40,22 @@ $ python3 sqldriveby.py --find-admin="http://www.yourpage.com"
 <br /><br />
 $ python3 sqldriveby.py --help
 
+Required Arguments:
+	
+	--term=     The parameter to search for. Example: --term=index.php?id=
+	
+Optional Arguments:
+	
+	--engine=   The search engine to use (y=Yahoo / b=Bing) (Default: Yahoo)
+	
+	--depth=    The number of pages of results to search through
+	
+Additional Features:
+
+	--find-admin=    Try to find the admin page via a dictionary list
+			 Example --find-admin="http://www.yourpage.com"
+	
+
 ## Help
 
 This program requires python 3 so if your system has both python 2 and python 3 you must run the program using python3 from command line. If your system only has python3 installed, you can run the program using python from command line.
