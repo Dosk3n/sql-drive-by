@@ -2,7 +2,7 @@
 
 ## Disclaimer
 
-This program was created for teaching purposes only! By using this program, you accept that I am not responsible for any decisions that you make!
+This program was created for teaching purposes only! By using this program, you accept that I am not responsible for any actions that you take as a result of using this program.
 
 ## Description
 
