@@ -18,7 +18,7 @@ This program was created when I was teaching a friend (Shout out to Jay =P) abou
 
 ## Requirements
 
-Python 3 and BeautifulSoup4.
+Python 3, Requests and BeautifulSoup4.
 
 ## Installation
 
