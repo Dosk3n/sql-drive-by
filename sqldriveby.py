@@ -10,15 +10,16 @@
 import bs4, requests, sys, os
 
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
+    HEADER    = '\033[95m'
+    OKBLUE    = '\033[94m'
+    OKGREEN   = '\033[92m'
+    WARNING   = '\033[93m'
+    FAIL      = '\033[91m'
+    ENDC      = '\033[0m'
+    BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
 
+	
 def createQuery(engine, term):
 	""" A function to create a url query from the search 
 	engine selected(char) and the search term(string) """
@@ -31,8 +32,8 @@ def createQuery(engine, term):
 		print("\nError[E3]: Not a valid search engine option.")
 		print("use tag --help to show options.")
 		sys.exit()
-	
 	return search_query
+	
 	
 def getSoupPackets(engine, search_query, depth):
 	""" Run the search query and return a list of beautifulsoup objects
@@ -57,13 +58,12 @@ def getSoupPackets(engine, search_query, depth):
 				
 				search_query = str(find_next[0]['href'])
 				
-				itteration = itteration + 1
+				itteration += 1
 			except:
 				# This loop will crash if the depth is greater that count of result
 				# pages so we catch the exception and stop the loop
 				itteration = depth
 				continue
-		
 		return soup_packets
 	elif(engine == 'b'):
 		# Bing results for each page uses its query to show the result number to start on
@@ -92,17 +92,17 @@ def getSoupPackets(engine, search_query, depth):
 				result_num = result_num + 10
 				search_query = original_search_query + "&first=" + str(result_num) + "&FORM=PORE"
 				
-				itteration = itteration + 1
+				itteration += 1
 			except:
 				# This loop will crash if the depth is greater that count of result
 				# pages so we catch the exception and stop the loop
 				itteration = depth
 				continue
 				
-		return soup_packets
+		return(soup_packets)
 	else:
-		print("\nError[E1]: Not a valid search engine option.")
-		sys.exit()
+		sys.exit("\nError[E1]: Not a valid search engine option.")
+	
 	
 def getUrlList(engine, soup_packets):
 	""" Search and return a list of urls formatted based on search engine """
@@ -121,8 +121,7 @@ def getUrlList(engine, soup_packets):
 					}
 					url_list.append(resultdict)
 			else:
-				print("\nNo results found.")
-				sys.exit()
+				sys.exit("\nNo results found.")
 		elif(engine == 'b'):
 			# The Bing results are a little harder so grab all urls from the page
 			findsoup = soup.find_all('a')
@@ -141,16 +140,14 @@ def getUrlList(engine, soup_packets):
 					except:
 						continue
 			else:
-				print("\nNo results found.")
-				sys.exit()
-			
-			
+				sys.exit("\nNo results found.")
 		else:
 			print("\nError[E2]: Not a valid search engine option.")
 			print("use --help to show options.")
 			sys.exit()
 			
 	return url_list
+	
 	
 def getMatchedUrls(url_list, term):
 	""" Filter out the results by checking they include our term """
@@ -163,6 +160,7 @@ def getMatchedUrls(url_list, term):
 			
 	return matched_list
 	
+	
 def checkVulnList(url_list):
 	""" Check if url is vulnerable to SQLi and add to new list """
 	print(bcolors.OKBLUE + "INFO: Testing URLs for SQLi vulnerabilities using ' method" + bcolors.ENDC)
@@ -172,9 +170,9 @@ def checkVulnList(url_list):
 	index_of_list = 0
 	num_of_success = 0
 	for url in url_list:
-		index_of_list = index_of_list + 1
+		index_of_list += 1
 		try:
-			os.system('clear')
+			os.system('cls') is sys.platform == 'win32' else os.system('clear')
 			header()
 			print(bcolors.OKBLUE + "INFO: Please be patient as we are checking", str(len(url_list)), "urls" + bcolors.ENDC)
 			print(bcolors.OKBLUE + "INFO: You can press ctrl+c to skip to the next in list" + bcolors.ENDC)
@@ -184,23 +182,24 @@ def checkVulnList(url_list):
 			
 			if("SQL syntax" in result.text):
 				vuln_list.append(url)
-				num_of_success = num_of_success + 1
+				num_of_success += 1
 			elif("SQL command" in result.text):
 				vuln_list.append(url)
-				num_of_success = num_of_success + 1
+				num_of_success += 1
 			elif("syntax error" in result.text):
 				vuln_list.append(url)
-				num_of_success = num_of_success + 1
+				num_of_success += 1
 			elif("Microsoft SQL" in result.text):
 				vuln_list.append(url)
-				num_of_success = num_of_success + 1
+				num_of_success += 1
 			elif("Query failed" in result.text):
 				vuln_list.append(url)
-				num_of_success = num_of_success + 1
+				num_of_success += 1
 		except:
 			continue
 	
 	return vuln_list
+	
 	
 def header():
 	""" Display the header at start of program """
@@ -223,21 +222,22 @@ def header():
 	print(bcolors.FAIL + "responsible for any stupid decisions that you make!" + bcolors.ENDC)
 	print()
 	
+	
 def loadingMsg():
 	print(bcolors.OKBLUE + "LOADING: The program is drinking its coffee in preperation" + bcolors.ENDC)
 	print()
 	
+	
 def getArgs():
 	""" Check the arguments and assign to option or exit with error """
 	if(len(sys.argv) < 2):
-		print("Invalid parameters. use --help to show options.\n")
-		sys.exit()
+		sys.exit("Invalid parameters. use --help to show options.\n")
 	
 	options = {
 		"term"   		  : "index.php?id=",
 		"engine" 		  : "y",
 		"depth"  		  : "1",
-		"find_admin_url"  : False,
+		"find_admin_url"          : False,
 		"need_help"		  : False
 	}
 	
@@ -254,6 +254,7 @@ def getArgs():
 			options['need_help'] = True
 		
 	return options
+	
 	
 def displayResults(vuln_list):
 	""" Display the results to the user """
@@ -275,6 +276,7 @@ def displayResults(vuln_list):
 		for i in unique_vuln_list:
 			print("Title:", i['title'], "\nURL:", i['url'], "\n")
 	
+	
 def findAdmin(find_admin_url):
 	""" Takes a url and checks against a list of possible locations for HTTP status 200 """
 	# Remove the final / in URL if it is there
@@ -285,8 +287,7 @@ def findAdmin(find_admin_url):
 	# Since we dont know if the user wants http or https we cant
 	# add it automatically as we cant just guess
 	if(find_admin_url[:4] != "http"):
-		print("Error: Make sure to include http:// or https:// in your URL\n")
-		sys.exit()
+		sys.exit("Error: Make sure to include http:// or https:// in your URL\n")
 	
 	# Check file with list of admin locations exists and if it does
 	# create a variable with all locations
@@ -296,15 +297,14 @@ def findAdmin(find_admin_url):
 		locations = admin_list_file.readlines()
 		admin_list_file.close
 	else:
-		print("Error: Unable to locate file: admin_list\n")
-		sys.exit()
+		sys.exit("Error: Unable to locate file: admin_list\n")
 	
 	# admin_list file exists so lets start looking for admin pages
 	found_pages = []
 	index_of_list = 0
 	num_of_success = 0
 	for location in locations:
-		index_of_list = index_of_list + 1
+		index_of_list += 1
 		try:
 			url = find_admin_url + location
 			# Since I am getting the locations from a text file they include \n at the
@@ -312,7 +312,7 @@ def findAdmin(find_admin_url):
 			url = url[:url.index('\n')]
 			result = requests.get(url)
 			
-			os.system('clear')
+			os.system('cls') is sys.platform == 'win32' else os.system('clear')
 			header()
 			print(bcolors.OKBLUE + "INFO: Please be patient as we are checking", str(len(locations)), "locations" + bcolors.ENDC)
 			print(bcolors.OKBLUE + "INFO: You can press ctrl+c to skip to the next in list" + bcolors.ENDC)
@@ -330,6 +330,7 @@ def findAdmin(find_admin_url):
 		
 	return found_pages
 	
+	
 def displayAdminResults(found_pages):
 	""" Display the results to the user """
 	print()
@@ -341,11 +342,13 @@ def displayAdminResults(found_pages):
 		for i in found_pages:
 			print("Location:", i, "\n")
 		
+		
 def handle_ctrl_c():
 	""" Provide options to a user who presses ctrl+c when in a try loop """
 	answer = input("\nAn exception was encountered with the current url or the user pressed CTRL+C \nDo you want to quit(q) or skip to the next URL in list(s)? q/S: ")
 	if(answer == "q"):
 		sys.exit()
+		
 		
 def helpMsg():
 	""" Show options available to user """
@@ -371,9 +374,8 @@ Additional Features:
 	""")
 	
 	
-	
 def main():
-	os.system('clear')
+	os.system('cls') is sys.platform == 'win32' else os.system('clear')
 	header()
 	
 	options = getArgs()						# Get arguments from command line
