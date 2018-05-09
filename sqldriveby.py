@@ -1,10 +1,10 @@
 # !python3
 #
-# SQLDriveBy v1.0.0a
+# SQLDriveBy v1.1.0
 # A program designed to find multiple websites that
 # are vulnerable to sql injection.
 # For learning and testing purposes only! I am not
-# responsible for any spudid decisions you make!
+# responsible for any stupid decisions you make!
 # by Dosk3n
 
 import bs4, requests, sys, os
@@ -111,7 +111,7 @@ def getUrlList(engine, soup_packets):
 	# For each soup(html page) loop through and get the URL data
 	for soup in soup_packets:
 		if(engine == 'y'):
-			findsoup = soup.find_all('a', class_=" td-u")
+			findsoup = soup.find_all('a', class_=" ac-algo fz-l ac-21th lh-24")
 			if(len(findsoup) > 0):
 				for i in findsoup:
 					# create a dictionary for that URL and add to list
@@ -120,6 +120,8 @@ def getUrlList(engine, soup_packets):
 						"url"	: i['href']
 					}
 					url_list.append(resultdict)
+
+					print(resultdict)
 			else:
 				print("\nNo results found.")
 				sys.exit()
@@ -149,7 +151,7 @@ def getUrlList(engine, soup_packets):
 			print("\nError[E2]: Not a valid search engine option.")
 			print("use --help to show options.")
 			sys.exit()
-			
+		
 	return url_list
 	
 def getMatchedUrls(url_list, term):
@@ -181,20 +183,23 @@ def checkVulnList(url_list):
 			print("Testing " + str(index_of_list) + "/" + str(len(url_list)) + ": " + url['url'])
 			print("Found:", num_of_success)
 			result = requests.get(url['url'] + "'", headers=headers)
-			
-			if("SQL syntax" in result.text):
+			########## ##########
+			if("sql syntax" in result.text.lower()):
 				vuln_list.append(url)
 				num_of_success = num_of_success + 1
-			elif("SQL command" in result.text):
+			elif("sql command" in result.text.lower()):
 				vuln_list.append(url)
 				num_of_success = num_of_success + 1
-			elif("syntax error" in result.text):
+			elif("syntax error" in result.text.lower()):
 				vuln_list.append(url)
 				num_of_success = num_of_success + 1
-			elif("Microsoft SQL" in result.text):
+			elif("microsoft sql" in result.text.lower()):
 				vuln_list.append(url)
 				num_of_success = num_of_success + 1
-			elif("Query failed" in result.text):
+			elif("query failed" in result.text.lower()):
+				vuln_list.append(url)
+				num_of_success = num_of_success + 1
+			elif("mysql" in result.text.lower()):
 				vuln_list.append(url)
 				num_of_success = num_of_success + 1
 		except:
