@@ -1,6 +1,6 @@
 # !python3
 #
-# SQLDriveBy v1.1.0
+# SQLDriveBy v1.1.1
 # A program designed to find multiple websites that
 # are vulnerable to sql injection.
 # For learning and testing purposes only! I am not
@@ -121,7 +121,6 @@ def getUrlList(engine, soup_packets):
 					}
 					url_list.append(resultdict)
 
-					print(resultdict)
 			else:
 				print("\nNo results found.")
 				sys.exit()
