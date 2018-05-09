@@ -217,7 +217,7 @@ def header():
 	print(bcolors.BOLD + "/ __|/ _ \| |      |   \ " + bcolors.WARNING + "((_|_))((_|_))" + bcolors.ENDC + bcolors.BOLD + "      | _ ) " + bcolors.WARNING + ")(_)) " + bcolors.ENDC)
 	print(bcolors.BOLD + "\__ \ (_) | |__    | |) | '_| \ V // -_)     | _ \ || | " + bcolors.ENDC)
 	print(bcolors.BOLD + "|___/\__\_\____|   |___/|_| |_|\_/ \___|     |___/\_, | " + bcolors.ENDC)
-	print(bcolors.BOLD + " By Dosk3n          v1.0.0                        |__/  " + bcolors.ENDC)
+	print(bcolors.BOLD + " By Dosk3n          v1.1.1                        |__/  " + bcolors.ENDC)
 	print("#######################################################")
 	print("#  Search Engine SQL Injection vulnerability Finder   #")
 	print("#  Website: https://github.com/Dosk3n/sql-drive-by    #")
